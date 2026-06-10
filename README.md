@@ -168,28 +168,6 @@ flowchart TD
    Report Generator 输出 Markdown 诊断报告，前端通过 SSE 实时展示全过程。
 ```
 
-## 性能与评估数据
-
-项目内置 benchmark 和 RAG 离线评估脚本，对 token、工具执行和检索准确率进行了量化评估。
-
-| 指标 | 优化结果 |
-|---|---:|
-| Planner prompt tokens | `9098 -> 575`，下降 **93.5%** |
-| 全链路 prompt tokens | `10526 -> 2450`，下降 **76.7%** |
-| 全链路 total tokens | `11889 -> 3988`，下降 **66.5%** |
-| 工具 catalog prompt tokens | 下降 **55.3%** |
-| 只读工具并行执行 | `1.06s -> 0.22s`，加速 **4.88x**，延迟下降 **79.5%** |
-| RAG 文档规模 | **954** 个文档 / **4080** 个 chunks |
-| RAG R@1 | `83.33% -> 91.67%` |
-| RAG MRR | `0.882 -> 0.938` |
-| 默认 top_k=3 | R@3 达到 **95.83%** |
-
-说明：
-
-- Token 数据来自真实 DashScope / OpenAI-compatible `usage` 返回。
-- 并行工具数据是 5 个独立只读工具的受控基准测试。
-- RAG 数据来自 24 题黄金集和 954 文档规模的离线评估。
-- Hybrid Search 在当前语料下虽然能提升 R@3/R@5，但 R@1 会下降，因此默认仍采用纯向量 `top_k=3`。
 
 ## 数据来源
 
@@ -201,7 +179,6 @@ flowchart TD
 | `data/kb_corpus/awesome-prometheus-alerts/` | 从开源项目 `samber/awesome-prometheus-alerts` 整理的 Prometheus 告警语料 |
 | 小林 OnCall Agent 项目 | 参考其中的 OnCall Agent 场景设计和诊断思路 |
 
-第三方语料 / 参考来源的作者、仓库地址和许可详见文末 [License](#license) 一节。
 
 ## 技术栈
 
@@ -382,12 +359,3 @@ multi_agent_github/
 └── run.ps1                 # Windows 一键启动脚本
 ```
 
-## License
-
-本项目代码以 **MIT License** 发布。
-
-项目集成或参考了以下第三方开源资产，公开发布时请遵守各自的许可与署名要求：
-
-- **[Aas-ee/open-webSearch](https://github.com/Aas-ee/open-webSearch)** — 作者 [@Aas-ee](https://github.com/Aas-ee)。V2 本地联网搜索 daemon，Docker 镜像 `ghcr.io/aas-ee/open-web-search:latest`，本仓库副本位于 `open-webSearch-main/`，由 `app/core/web_search.py` 通过 HTTP 调用。
-- **[samber/awesome-prometheus-alerts](https://github.com/samber/awesome-prometheus-alerts)** — 作者 [@samber](https://github.com/samber)。RAG 知识库中 Prometheus 告警语料的来源，原始内容遵循 Creative Commons Attribution 4.0 International (CC BY 4.0)。本仓库副本位于 `data/kb_corpus/awesome-prometheus-alerts/`。
-- **小林 OnCall Agent 项目** — 参考其 OnCall Agent 场景设计、诊断流程和项目表达方式。
