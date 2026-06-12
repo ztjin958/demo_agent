@@ -2,8 +2,6 @@
 
 面向 OnCall / SRE 场景的多智能体智能运维诊断平台。
 
-项目视频 https://www.bilibili.com/video/BV182RCBGEod/
-
 项目基于 `FastAPI`、`LangGraph`、`RAG`、`Milvus`、`MCP` 和 DeepSeek / DashScope 兼容大模型构建。系统采用 **先选择 Skill，再规划诊断步骤，再调用工具执行，最后复盘生成报告** 的流程，可根据告警或故障描述自动选择合适的诊断策略，调用知识库和实时工具服务，输出结构化诊断报告。
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
@@ -14,12 +12,7 @@
 
 ---
 
-## V2 更新说明
 
-以上为项目原版说明。V2 在不改动 Skill-first、Plan-Execute-Replan、RAG、MCP 工具、会话记忆等主体能力的前提下，做了两条主线改动：
-
-1. 新增 **AgentHarness 控制面**，把原本分散在各模块里的 prompt、模型选择、终止条件、降级和统计逻辑集中管理。
-2. 联网搜索从 Tavily 切换到本地 [**open-webSearch**](https://github.com/Aas-ee/open-webSearch) daemon，并接入 Docker Compose 和 `run.ps1`。
 
 ### 1. AgentHarness 控制面
 
