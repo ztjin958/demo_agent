@@ -25,7 +25,6 @@
 - **降级 fallback**：知识库或联网搜索失败时返回稳定的降级上下文和前端可见的降级事件，业务代码不再自己处理异常。
 - **统计与预算**：把 token、耗时、工具调用次数等指标收敛成统一的 stats 事件，并支持 token / 时间预算的 warning 与 exceeded 告警。
 
-V2 没有改 Agent 流程拓扑，只是把 Skill Router、Planner、Executor、Replanner、Report、RAG Chat 各阶段的 prompt、模型和策略来源换成 Harness。
 
 ### 2. 联网搜索切换到 open-webSearch
 
@@ -36,7 +35,6 @@ WEB_SEARCH_PROVIDER=open_websearch
 OPEN_WEBSEARCH_BASE_URL=http://127.0.0.1:3210
 ```
 
-老配置 `WEB_SEARCH_PROVIDER=tavily` 会兼容映射到新 provider，不需要手动迁移。
 
 ### 3. open-webSearch 启动脚本
 
